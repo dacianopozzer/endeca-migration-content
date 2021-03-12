@@ -1,53 +1,101 @@
 import json
 from collections.abc import Mapping
 import os
-F_NAME = ''
 LANGUAGE = 'pt_BR'
-APP_FOLDER = ''
+APP_PATH = 'C:/tmp/BKP-VM/parse_python'
+FOLDER = 'content'
+#FOLDER = 'pages'
+#FOLDER = 'templates'
+AUX_TEMPLATE = []
 
+def update_prop(json, key, new_value):
+  print(json)
+  json[key] = new_value
+  return json
 
-def parse_dict(dict):
-  for key in dict.keys():
-    print(key)
-    if isinstance(dict[key], Mapping):
-      cur_dict = dict[key]
-      if '@class' in cur_dict and cur_dict['@class'] == 'com.endeca.content.StringMap':
-        print(cur_dict)
-        if LANGUAGE in cur_dict:
-          dict[key] = cur_dict[LANGUAGE]
-        else:
-          dict[key] = ''
-      else:
-        parse_dict(dict[key])
+def aux(json, log):
+  if '@class' in json and json['@class'] == 'com.endeca.content.StringMap':
+    if LANGUAGE in json:
+      return True, json['pt_BR']
+    elif (len(json) == 1):
+      return True, ''
+    else:
+      strAux = ''
+      for key in json:
+        if key != '@class':
+          strAux += str(key) + '=' + str(json[key]) + ','
+      print('----------------- ATENCAO para item: ', strAux, file=log)
+      return True, strAux
 
+  if '@type' in json and json['@type'] == '_UNKNOWN_':
+    new_dict = {}
+    return True, new_dict
 
-def migrate_file(file):
-  with open(F_NAME, encoding='UTF-8') as f:
+  if FOLDER == 'templates' and 'editor' in json and json['editor'] == 'editors/StringMapEditor':
+    propertyName = json['propertyName']
+    json['editor'] = 'editors/StringEditor'
+    AUX_TEMPLATE.append(propertyName)
+    return True, json
+
+  return False, json
+
+def aux_template_type(json, log):
+  for key in AUX_TEMPLATE:
+    json['typeInfo'][key]['@propertyType'] = 'String'
+  return json
+
+def process(json, log):
+  if type(json) is dict:
+    changed, new = aux(json, log)
+    if changed:
+      return new
+    for key in json:
+      json[key] = process(json[key], log)
+
+  if type(json) is list:
+    for idx, child in enumerate(json):
+      json[idx] = process(child, log)
+
+  return json
+
+def migrate_file(file, log):
+  global AUX_TEMPLATE
+  AUX_TEMPLATE = []
+  with open(file, encoding='UTF-8') as f:
     data = json.load(f)
-    parse_dict(data)
-    with open('c:/tmp/test.json', mode='w', encoding='UTF-8') as f1:
-      json.dump(data, f1, indent=4)
+    dump1 = json.dumps(data)
+    process(data, log)
+    dump2 = json.dumps(data)
+    
+    aux_template_type(data, log)
 
+    if(len(dump1) == len(dump2)):
+      print("migrate_file no changes...", file=log)
+    else:
+      with open(file, 'w') as f:
+        json.dump(data, f, indent=4)      
 
+def save(data):
+  with open('new_template.json', 'w') as f:
+    json.dump(data, f, indent=4)
+  
 def migrate_contents():
-  for root, _, files in os.walk(os.path.join(APP_FOLDER, 'content')):
-    for file in files:
-      _, ext = os.path.splitext(file)
-      if ext == '.json':
-        print(os.path.join(root, file))
+  print('Start parsing json, folder: ', FOLDER)
+  with open('log_.txt', 'w') as log:
+    for root, _, files in os.walk(os.path.join(APP_PATH, FOLDER)):
+      for file in files:
+        _, ext = os.path.splitext(file)
+        if ext == '.json':
+          auxFile = os.path.join(root, file)
+          print(auxFile, file=log)
+          #if (auxFile.find('RichRelevanceDiscoverResultsList') >= 0 or auxFile.find('RichRelevanceResultsList') >= 0 or auxFile.find('RichRelevanceDynamicExperiences') >= 0):
+          #    print('Manual Changed', file=log)
+          #    continue
+          migrate_file(auxFile, log)
 
 
-def test_content():
-  print('Initialing parsing content')
-  for root, _, files in os.walk(os.path.join(APP_FOLDER, 'content')):
-    for file in files:
-      _, ext = os.path.splitext(file)
-      if ext == '.json':
-        try:
-          with open(os.path.join(root, file), encoding='UTF-8') as f:
-            json.load(f)
-        except:
-          print('Error parsing ' + os.path.join(root, file))
-  print('Finish parsing content...')
+  print('End parsing json...')
 
-test_content()
+migrate_contents()
+
+#migrate_file('./new_menu.json')      

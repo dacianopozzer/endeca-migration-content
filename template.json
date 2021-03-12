@@ -1,0 +1,409 @@
+{
+    "locales": {},
+    "@description": "${template.description}",
+    "@group": "Page",
+    "ecr:createDate": "2017-05-25T16:43:00.000-02:00",
+    "@thumbnailUrl": "thumbnail.png",
+    "ecr:type": "template",
+    "typeInfo": {
+        "media": {
+            "@propertyType": "Item"
+        },
+        "phoneNumber": {
+            "@propertyType": "Item"
+        },
+        "mediaManualUrl": {
+            "@propertyType": "String"
+        },
+        "linkLogo": {
+            "@propertyType": "Item"
+        },
+        "headerText": {
+            "@propertyType": "Item"
+        },
+        "autogenMeta": {
+            "@propertyType": "Boolean"
+        },
+        "seoTitle": {
+            "@propertyType": "String"
+        },
+        "paymentTerm": {
+            "@propertyType": "String"
+        },
+        "seoDescription": {
+            "@propertyType": "String"
+        },
+        "titleHeader": {
+            "@propertyType": "String"
+        },
+        "notAvailableItemsMessage": {
+            "@propertyType": "Item"
+        },
+        "headerContent": {
+            "@propertyType": "ContentItemList",
+            "@group": "HeaderContent"
+        },
+        "secondaryContent": {
+            "@propertyType": "ContentItemList",
+            "@group": "SecondaryContent"
+        },
+        "mainContent": {
+            "@propertyType": "ContentItemList",
+            "@group": "MainContent"
+        },
+        "footerContent": {
+            "@propertyType": "ContentItemList",
+            "@group": "FooterContent"
+        },
+        "redirectGroup": {
+            "@propertyType": "String"
+        },
+        "classBody": {
+            "@propertyType": "String"
+        },
+        "oneClick": {
+            "@propertyType": "Boolean"
+        },
+        "deliveryOptionDefault": {
+            "@propertyType": "Boolean"
+        },
+        "seoConfig": {
+            "@propertyType": "String"
+        },
+        "seoTagsValues": {
+            "@propertyType": "Item"
+        },
+        "chaordic": {
+            "@propertyType": "String"
+        },
+        "cadastra": {
+            "@propertyType": "String"
+        },
+        "validateProfile": {
+            "@propertyType": "Boolean"
+        },
+        "buyButtonColor": {
+            "@propertyType": "String"
+        },
+        "partnerVoucherLabel": {
+            "@propertyType": "Item"
+        },
+        "partnerFreePriceLabel": {
+            "@propertyType": "Item"
+        },
+        "partnerPopupMessage": {
+            "@propertyType": "Item"
+        },
+        "contentAlt": {
+            "@propertyType": "Item"
+        }
+    },
+    "defaultContentItem": {
+        "seoDescription": "",
+        "secondaryContent": [],
+        "cadastra": "Outra",
+        "validateProfile": false,
+        "chaordic": "checkout",
+        "deliveryOptionDefault": true,
+        "seoTitle": "",
+        "autogenMeta": true,
+        "redirectGroup": "",
+        "mediaManualUrl": "",
+        "oneClick": false,
+        "headerContent": [],
+        "@name": "Checkout Page",
+        "seoConfig": "generalSeoConfig",
+        "buyButtonColor": "2a2a2a",
+        "titleHeader": "",
+        "mainContent": [],
+        "classBody": "",
+        "paymentTerm": "",
+        "footerContent": [],
+        "media": {
+            "@class": "com.endeca.infront.cartridge.model.MediaObject"
+        },
+        "phoneNumber": "",
+        "linkLogo": {
+            "@class": "com.endeca.infront.cartridge.model.LinkBuilder"
+        },
+        "headerText": "",
+        "notAvailableItemsMessage": "Ao selecionar um CEP diferente do informado na sacola, voc\u00ea pode afetar a disponibilidade dos itens do seu pedido.",
+        "seoTagsValues": "",
+        "partnerVoucherLabel": "",
+        "partnerFreePriceLabel": "",
+        "partnerPopupMessage": "",
+        "contentAlt": ""
+    },
+    "editorPanel": {
+        "editor": "editors/DefaultEditorPanel",
+        "children": [
+            {
+                "editor": "GroupLabel",
+                "label": "${property.headerText.title}"
+            },
+            {
+                "editor": "editors/MediaEditor",
+                "propertyName": "media",
+                "imageServiceId": "/services/images",
+                "label": "${property.media.label}",
+                "enabled": true
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "mediaManualUrl",
+                "label": "${property.mediaManualUrl.label}",
+                "enabled": true
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "contentAlt",
+                "label": "${contentAlt.label}",
+                "enabled": true
+            },
+            {
+                "editor": "editors/LinkBuilderEditor",
+                "propertyName": "linkLogo",
+                "label": "${property.linkLogo.label}",
+                "enabled": true
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "headerText",
+                "label": "${property.headerText.label}",
+                "enabled": true
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "phoneNumber",
+                "label": "${property.phoneNumber.label}",
+                "enabled": true
+            },
+            {
+                "editor": "GroupLabel",
+                "label": "${group.seoTags.label}"
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "seoTitle",
+                "label": "${property.seoTitle.label}",
+                "enabled": true
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "seoDescription",
+                "label": "${property.seoDescription.label}",
+                "enabled": true
+            },
+            {
+                "editor": "editors/ChoiceEditor",
+                "propertyName": "seoConfig",
+                "label": "${property.seoConfig.label}",
+                "choice": [
+                    {
+                        "label": "${property.seoConfig.general}",
+                        "value": "generalSeoConfig"
+                    },
+                    {
+                        "label": "${property.seoConfig.category}",
+                        "value": "categorySeoConfig"
+                    },
+                    {
+                        "label": "${property.seoConfig.list}",
+                        "value": "listSeoConfig"
+                    },
+                    {
+                        "label": "${property.seoConfig.brand}",
+                        "value": "brandSeoConfig"
+                    },
+                    {
+                        "label": "${property.seoConfig.lookbook}",
+                        "value": "lookbookSeoConfig"
+                    },
+                    {
+                        "label": "${property.seoConfig.product}",
+                        "value": "productSeoConfig"
+                    },
+                    {
+                        "label": "${property.seoConfig.myAccountCheckout}",
+                        "value": "myAccountCheckoutSeoConfig"
+                    }
+                ]
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "seoTagsValues",
+                "bottomLabel": "${property.seoTagsValues.bottomLabel}",
+                "label": "${property.seoTagsValues.label}",
+                "enabled": true
+            },
+            {
+                "editor": "GroupLabel",
+                "label": "${group.settings.label}"
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "titleHeader",
+                "label": "${property.titleHeader.label}",
+                "enabled": true
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "classBody",
+                "bottomLabel": "${property.classBody.bottomLabel}",
+                "label": "${property.classBody.label}",
+                "enabled": true
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "notAvailableItemsMessage",
+                "bottomLabel": "${property.notAvailableItemsMessage.bottomLabel}",
+                "label": "${property.notAvailableItemsMessage.label}",
+                "enabled": true
+            },
+            {
+                "editor": "editors/BooleanEditor",
+                "propertyName": "oneClick",
+                "label": "${property.oneClick.label}"
+            },
+            {
+                "editor": "editors/BooleanEditor",
+                "propertyName": "deliveryOptionDefault",
+                "bottomLabel": "${property.deliveryOptionDefault.bottomLabel}",
+                "label": "${property.deliveryOptionDefault.label}"
+            },
+            {
+                "editor": "GroupLabel",
+                "label": "${group.chaordicSettings.label}"
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "chaordic",
+                "label": "${property.chaordic.label}",
+                "enabled": false
+            },
+            {
+                "editor": "GroupLabel",
+                "label": "${group.cadastra.label}"
+            },
+            {
+                "editor": "editors/ChoiceEditor",
+                "propertyName": "cadastra",
+                "label": "${property.cadastra.label}",
+                "choice": [
+                    {
+                        "label": "${property.cadastra.home}",
+                        "value": "Home"
+                    },
+                    {
+                        "label": "${property.cadastra.category}",
+                        "value": "Categoria"
+                    },
+                    {
+                        "label": "${property.cadastra.brand}",
+                        "value": "Marca"
+                    },
+                    {
+                        "label": "${property.cadastra.list}",
+                        "value": "Lista"
+                    },
+                    {
+                        "label": "${property.cadastra.login}",
+                        "value": "Login"
+                    },
+                    {
+                        "label": "${property.cadastra.search}",
+                        "value": "Busca"
+                    },
+                    {
+                        "label": "${property.cadastra.checkout}",
+                        "value": "Checkout"
+                    },
+                    {
+                        "label": "${property.cadastra.cart}",
+                        "value": "Carrinho"
+                    },
+                    {
+                        "label": "${property.cadastra.confirmation}",
+                        "value": "Finalizacao"
+                    },
+                    {
+                        "label": "${property.cadastra.product}",
+                        "value": "Produto"
+                    },
+                    {
+                        "label": "${property.cadastra.register}",
+                        "value": "Cadastro"
+                    },
+                    {
+                        "label": "${property.cadastra.departament}",
+                        "value": "Departamento"
+                    },
+                    {
+                        "label": "${property.cadastra.account}",
+                        "value": "Minha-conta"
+                    },
+                    {
+                        "label": "${property.cadastra.orders}",
+                        "value": "Meus-pedidos"
+                    },
+                    {
+                        "label": "${property.cadastra.data}",
+                        "value": "Meus-dados"
+                    },
+                    {
+                        "label": "${property.cadastra.other}",
+                        "value": "Outra"
+                    }
+                ]
+            },
+            {
+                "editor": "GroupLabel",
+                "label": "${group.login.label}"
+            },
+            {
+                "editor": "editors/BooleanEditor",
+                "propertyName": "validateProfile",
+                "bottomLabel": "${property.validateProfile.bottomLabel}",
+                "label": "${property.validateProfile.label}"
+            },
+            {
+                "editor": "GroupLabel",
+                "label": "${group.personalization.label}"
+            },
+            {
+                "editor": "editors/ColorEditor",
+                "propertyName": "buyButtonColor",
+                "label": "${property.buyButtonColor.label}",
+                "enabled": true
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "paymentTerm",
+                "label": "${property.paymentTerm.label}",
+                "enabled": true
+            },
+            {
+                "editor": "GroupLabel",
+                "label": "${group.partner.label}"
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "partnerVoucherLabel",
+                "bottomLabel": "${property.partnerVoucherLabel.bottomLabel}",
+                "label": "${property.partnerVoucherLabel.label}"
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "partnerFreePriceLabel",
+                "bottomLabel": "${property.partnerFreePriceLabel.bottomLabel}",
+                "label": "${property.partnerFreePriceLabel.label}"
+            },
+            {
+                "editor": "editors/StringEditor",
+                "propertyName": "partnerPopupMessage",
+                "bottomLabel": "${property.partnerPopupMessage.bottomLabel}",
+                "label": "${property.partnerPopupMessage.label}"
+            }
+        ]
+    }
+}
